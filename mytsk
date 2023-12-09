@@ -1,1 +1,85 @@
-// my task
+ this.loadData = function(pharmId){ //Загрузка данных анкеты в созданую таблицу (Form)
+                this.pharmId = pharmId;
+                _store.rejectChanges();
+                $.getJSON('./modules/units/units.php?action=GET_FORMDATA&pharmId=' + pharmId + '&projectId=' + _param.projectId + '&stageId=' + _param.stageId + '&rnd='+Math.random(), function(data){
+                    _store.loadData(data.rows);
+                    $.unblockUI();
+                });
+            }
+        }
+        Form.inherits(App.VisualElement);
+
+        //===========================================================================================================
+
+
+        function main(viewPort) { //создается окно модуля
+            _windowContainer = viewPort;
+
+            header = new Header(); //шапка модуля (документа)
+            panel = new Panel();
+
+            header.appendTo(_windowContainer.find('.body')); //добавляем ее на рабочую область
+            header.add({
+                title: new Title(),
+                description: new Description()
+            }); //Добавляем на шапку рабочие элементы
+
+            header.container['description'].element().load('./modules/units/forms.html?'+Math.random(), function(){
+                $.unblockUI();
+                panel.container['grid'].height($('#window').outerHeight() - header.height());
+                panel.container['form'].height($('#window').outerHeight() - header.height());
+            }.bind(this)); //загружаем "статический" текст-описание
+
+            header.addButton('save', function(){
+                save();
+            }); //обработчик на кнопку сохранения
+
+            panel.appendTo(_windowContainer.find('.body')); //Панель эта главная рабочая область окна
+            panel.add({
+                grid: new Grid(),
+                form: new Form()
+            }); //На нее добавляем список аптек и таблицу - анкету
+
+            panel.container['grid'].rowClick(function(record, index){
+                panel.container['form'].loadData(record.id);
+            }); //При выборе аптеки подгружаем анкету
+
+            header.click(function(){
+                panel.hide();
+                header.toggle(function(){
+                    panel.show();                    
+                    panel.container['grid'].height($('#window').outerHeight() - header.height());
+                    panel.container['form'].height($('#window').outerHeight() - header.height());
+                });
+            }); //При нажатии на шапку - сворачиваем ее
+        }
+
+        var sync = function (message) {
+            switch (message.event) {//сообщения приходят только от ядра, 
+                                    //если другой модуль хочет отправить сообщение этому модулю
+                                    //то все равно его "прокидывает" ядро по таргету
+                case "binding": //сообщение приходит один раз при успешной привязке к ядру
+                    $(window.document).unbind('ajaxStart');
+                    _guid = message.guid;
+                    _name = message.name;
+                    _param = message.data;
+                    if (_param.edit == undefined) {
+                        _param.edit = true
+                    }
+                    main(message.viewPort);
+                    break;
+                case "unbinding": //сообщение приходит один раз при выгрузке модуля
+                    $(window.document).ajaxStart($.blockUI);
+                    break;
+                case "show": //сообщение приходит всякий раз когда модуль становится "активным", 
+                             //т.е. окно модуля получает фокус
+                    $(window.document).unbind('ajaxStart');
+                    break;
+                case "hide": //сообщение приходит при скрытии окна 
+                    $(window.document).ajaxStart($.blockUI);
+                    break;
+                case "message": //любое другое сообщение, например служебное или от другого модуля
+                    alert(message.body.test);
+                    break;
+            }
+        };
