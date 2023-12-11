@@ -1,1 +1,2 @@
-
+ this.loadData = function(pharmId){ //Загрузка данных анкеты в созданую таблицу (Form)
+                this.pharmId = pharmId;
