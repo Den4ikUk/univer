@@ -1,2 +1,9 @@
  this.loadData = function(pharmId){ //Загрузка данных анкеты в созданую таблицу (Form)
                 this.pharmId = pharmId;
+  _store.rejectChanges();
+                $.getJSON('./modules/units/units.php?action=GET_FORMDATA&pharmId=' + pharmId + '&projectId=' + _param.projectId + '&stageId=' + _param.stageId + '&rnd='+Math.random(), function(data){
+                    _store.loadData(data.rows);
+                    $.unblockUI();
+                });
+            }
+        }
