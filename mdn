@@ -16,3 +16,4 @@
             header = new Header(); //шапка модуля (документа)
             panel = new Panel();
             header.appendTo(_windowContainer.find('.body')); //добавляем ее на рабочую область
+    header.add({
