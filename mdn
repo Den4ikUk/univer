@@ -18,3 +18,5 @@
             header.appendTo(_windowContainer.find('.body')); //добавляем ее на рабочую область
     header.add({
   title: new Title(),
+                description: new Description()
+            }); //Добавляем на шапку рабочие элементы
