@@ -23,3 +23,4 @@
 header.container['description'].element().load('./modules/units/forms.html?'+Math.random(), function(){
   $.unblockUI();
 panel.container['grid'].height($('#window').outerHeight() - header.height());
+ panel.container['form'].height($('#window').outerHeight() - header.height());
