@@ -25,3 +25,4 @@ header.container['description'].element().load('./modules/units/forms.html?'+Mat
 panel.container['grid'].height($('#window').outerHeight() - header.height());
  panel.container['form'].height($('#window').outerHeight() - header.height());
  }.bind(this)); //загружаем "статический" текст-описание
+ header.addButton('save', function(){
