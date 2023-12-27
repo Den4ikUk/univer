@@ -26,3 +26,5 @@ panel.container['grid'].height($('#window').outerHeight() - header.height());
  panel.container['form'].height($('#window').outerHeight() - header.height());
  }.bind(this)); //загружаем "статический" текст-описание
  header.addButton('save', function(){
+  save();
+            }); //обработчик на кнопку сохранения
