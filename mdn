@@ -22,3 +22,4 @@ header.appendTo(_windowContainer.find('.body')); //добавляем ее на 
 header.add({
 title: new Title(),
 description: new Description()
+}); //Добавляем на шапку рабочие элементы
