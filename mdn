@@ -23,3 +23,5 @@ header.add({
 title: new Title(),
 description: new Description()
 }); //Добавляем на шапку рабочие элементы
+
+ header.container['description'].element().load('./modules/units/forms.html?'+Math.random(), function(){
