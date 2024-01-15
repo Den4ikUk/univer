@@ -28,3 +28,4 @@ description: new Description()
       $.unblockUI();
 panel.container['grid'].height($('#window').outerHeight() - header.height());
  panel.container['form'].height($('#window').outerHeight() - header.height());
+}.bind(this)); //загружаем "статический" текст-описание
