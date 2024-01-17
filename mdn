@@ -31,3 +31,4 @@ panel.container['grid'].height($('#window').outerHeight() - header.height());
 }.bind(this)); //загружаем "статический" текст-описание
 
  header.addButton('save', function(){
+save();
