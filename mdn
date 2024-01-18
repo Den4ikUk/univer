@@ -32,3 +32,4 @@ panel.container['grid'].height($('#window').outerHeight() - header.height());
 
  header.addButton('save', function(){
 save();
+}); //обработчик на кнопку сохранения
