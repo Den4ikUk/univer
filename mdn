@@ -16,3 +16,4 @@ Form.inherits(App.VisualElement);
     _windowContainer = viewPort;
 
   header = new Header(); //шапка модуля (документа)
+panel = new Panel();
