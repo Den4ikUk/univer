@@ -14,3 +14,5 @@ Form.inherits(App.VisualElement);
 
     function main(viewPort) { //создается окно модуля
     _windowContainer = viewPort;
+
+  header = new Header(); //шапка модуля (документа)
