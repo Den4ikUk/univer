@@ -19,3 +19,4 @@ Form.inherits(App.VisualElement);
 panel = new Panel();
 
  header.appendTo(_windowContainer.find('.body')); //добавляем ее на рабочую область
+ header.add({
